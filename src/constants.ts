@@ -1,5 +1,5 @@
 
-export const WHATSAPP_NUMBER = '59177166322';
+export const WHATSAPP_NUMBER = '59167586386';
 
 // El usuario debe convertir su PDF a imágenes y nombrarlas así.
 export const CATALOG_PAGES: string[] = [
