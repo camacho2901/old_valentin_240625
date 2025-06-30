@@ -1,0 +1,5 @@
+{
+  "name": "Destileria Old Valentin",
+  "description": "An elegant e-commerce landing page for an artisanal distillery, allowing users to view a catalog, select products, and finalize their order via WhatsApp.",
+  "requestFramePermissions": ["geolocation"]
+}
