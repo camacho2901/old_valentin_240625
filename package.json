@@ -7,8 +7,10 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "deploy": "npm run build && gh-pages -d dist"
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist"
   },
+  "homepage": "https://camacho2901.github.io/old_valentin_240625",
   "dependencies": {
     "react": "^19.1.0",
     "react-dom": "^19.1.0"
