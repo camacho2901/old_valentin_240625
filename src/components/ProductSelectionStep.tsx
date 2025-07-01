@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Product, CartItem } from '../types.ts';
 import { PRODUCTS } from '../products.ts';
@@ -37,14 +36,14 @@ const ProductSelectionStep: React.FC<ProductSelectionStepProps> = ({ cartItems, 
   const total = cartItems.reduce((sum, item) => sum + item.product.price * item.quantity, 0);
 
   return (
-    <div className="flex flex-col space-y-6">
+    <div className="relative min-h-screen pb-32 flex flex-col space-y-6 bg-gray-900 text-white">
       <div className="text-center">
         <h2 className="text-yellow-400 text-2xl font-bold tracking-wider">Destileria Artesanal</h2>
         <h3 className="text-white text-3xl font-extrabold">"OLD VALENTIN"</h3>
       </div>
       
       <div>
-          <div className="flex items-center space-x-4">
+        <div className="flex items-center space-x-4">
           <select
             id="product-select"
             value={selectedProductId}
@@ -91,19 +90,27 @@ const ProductSelectionStep: React.FC<ProductSelectionStepProps> = ({ cartItems, 
                   <span className="font-semibold">Bs. {(item.product.price * item.quantity).toFixed(2)}</span>
                 </li>
               ))}
-               <li className="flex justify-between text-base font-bold border-t border-gray-500 pt-2 mt-2">
-                  <span>TOTAL</span>
-                  <span>Bs. {total.toFixed(2)}</span>
-                </li>
+              <li className="flex justify-between text-base font-bold border-t border-gray-500 pt-2 mt-2">
+                <span>TOTAL</span>
+                <span>Bs. {total.toFixed(2)}</span>
+              </li>
             </ul>
           )}
         </div>
       </div>
 
+      {/* Botón "Confirmar Pedido" fijo, centrado abajo */}
       <button
         onClick={onConfirm}
         disabled={cartItems.length === 0}
-        className="w-full bg-amber-600 hover:bg-amber-700 text-white font-bold py-3 rounded-lg transition-colors disabled:bg-gray-700 disabled:opacity-50 disabled:cursor-not-allowed"
+        className="
+          fixed bottom-4 left-1/2 transform -translate-x-1/2
+          w-11/12 max-w-sm
+          bg-amber-600 hover:bg-amber-700
+          text-white font-bold py-3 rounded-lg shadow-lg
+          transition-colors z-50
+          disabled:bg-gray-700 disabled:opacity-50 disabled:cursor-not-allowed
+        "
       >
         Confirmar Pedido
       </button>
