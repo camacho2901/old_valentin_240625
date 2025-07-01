@@ -18,6 +18,8 @@ export const CATALOG_PAGES: string[] = [
   './13.png',
   './14.png',
   './15.png',
+  './16.png',
+  './17.png',
 ];
 
 // El usuario debe colocar su imagen QR en la raíz del proyecto.

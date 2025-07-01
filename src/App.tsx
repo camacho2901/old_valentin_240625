@@ -35,20 +35,24 @@ const App: React.FC = () => {
   return (
     <div className="absolute inset-0 flex flex-col items-center justify-center p-4 z-10">
       <div className="w-full max-w-4xl h-[70vh] flex items-center justify-center">
-        <PdfSlider pages={CATALOG_PAGES} />
+        <PdfSlider pages={CATALOG_PAGES} hideArrows={isModalOpen} />
       </div>
 
-      <div className="mt-8">
+      {/* Botón flotante con animación en móviles */}
+      <div
+        className="fixed bottom-4 left-1/2 transform -translate-x-1/2 z-50 w-[90%] max-w-xs sm:relative sm:mt-8 sm:translate-x-0 sm:left-0 sm:w-auto
+                   opacity-0 translate-y-4 animate-fade-in-up"
+      >
         <button
           onClick={openModal}
-          className="bg-amber-600 hover:bg-amber-700 text-white font-bold py-3 px-10 rounded-lg shadow-lg transition-colors text-lg"
+          className="w-full sm:w-auto bg-amber-600 hover:bg-amber-700 text-white font-bold py-3 px-6 rounded-lg shadow-lg transition-colors text-lg"
         >
           COMPRAR AHORA
         </button>
       </div>
 
       <Modal isOpen={isModalOpen} onClose={closeModal}>
-        <div className="scale-90"> {/* Reducido un 10-20% */}
+        <div className="scale-90 sm:scale-95 md:scale-100">
           {step === 1 ? (
             <ProductSelectionStep
               cartItems={cartItems}

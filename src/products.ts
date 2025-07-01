@@ -1,8 +1,9 @@
 import { Product } from './types';
 export const PRODUCTS: Product[] = [
-  { id: 1, name: 'EL CONQUISTADOR', price: 100 },
-  { id: 2, name: 'DON VALENTIN', price: 150 },
-  { id: 3, name: 'WHISKEY DE CANELA', price: 150 },
-  { id: 4, name: 'WHISKEY DE COCA TROPICAL', price: 150 },
-  { id: 5, name: 'WHISKY SUGAR HOUSE', price: 30 },
+  { id: 1, name: 'Whisky de Canela, Etq. Negra 18a.', price: 150 },
+  { id: 2, name: 'Whisky de Canela, Etq. Roja 12a.', price: 150 },
+  { id: 3, name: 'Whisky de Coca Tropical', price: 150 },
+  { id: 4, name: 'Whisky, Sugar House', price: 150 },
+  { id: 5, name: 'El Conquistardor, Cogñac Brandy', price: 30 },
+  { id: 6, name: 'Don Valentin, Singani', price: 120 },
 ];
