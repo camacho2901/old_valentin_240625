@@ -11,23 +11,16 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
   if (!isOpen) return null;
 
   return createPortal(
-    <div className="fixed inset-0 bg-black bg-opacity-60 z-50 flex items-center justify-center p-4">
-      <div
-        className="
-          bg-blue-900 text-white rounded-xl shadow-2xl animate-modal-zoom
-          w-full max-w-fit min-w-[280px]
-          p-4 sm:p-5 relative
-        "
-      >
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60">
+      <div className="relative w-full max-w-md mx-4 bg-gradient-to-b from-[#10152f] to-[#0a0c14] text-white rounded-2xl shadow-xl animate-modal-zoom">
         <button
           onClick={onClose}
-          className="absolute top-2 right-3 text-gray-300 hover:text-red-400 text-xl font-bold"
+          className="absolute top-2 right-3 text-gray-300 hover:text-red-400 text-xl font-bold z-10"
           aria-label="Cerrar modal"
         >
           &times;
         </button>
-
-        <div className="space-y-4">
+        <div className="max-h-[90vh] overflow-y-auto px-4 py-6">
           {children}
         </div>
       </div>

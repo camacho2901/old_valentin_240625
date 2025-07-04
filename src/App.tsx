@@ -33,12 +33,11 @@ const App: React.FC = () => {
   };
 
   return (
-    <div className="absolute inset-0 flex flex-col items-center justify-center p-4 z-10">
+    <div className="flex flex-col items-center justify-center p-4 min-h-screen z-10">
       <div className="w-full max-w-4xl h-[70vh] flex items-center justify-center">
         <PdfSlider pages={CATALOG_PAGES} hideArrows={isModalOpen} />
       </div>
 
-      {/* Botón flotante con animación en móviles */}
       <div
         className="fixed bottom-4 left-1/2 transform -translate-x-1/2 z-50 w-[90%] max-w-xs sm:relative sm:mt-8 sm:translate-x-0 sm:left-0 sm:w-auto
                    opacity-0 translate-y-4 animate-fade-in-up"
@@ -52,7 +51,7 @@ const App: React.FC = () => {
       </div>
 
       <Modal isOpen={isModalOpen} onClose={closeModal}>
-        <div className="scale-90 sm:scale-95 md:scale-100">
+        <div className="scale-100 sm:scale-100">
           {step === 1 ? (
             <ProductSelectionStep
               cartItems={cartItems}

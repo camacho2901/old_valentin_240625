@@ -9,7 +9,6 @@ interface PaymentStepProps {
 
 const PaymentStep: React.FC<PaymentStepProps> = ({ cartItems, onBack }) => {
   const [locationStatus, setLocationStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
-  const [location, setLocation] = useState<{ latitude: number, longitude: number } | null>(null);
 
   const handleDownloadQR = () => {
     const link = document.createElement('a');
@@ -25,10 +24,6 @@ const PaymentStep: React.FC<PaymentStepProps> = ({ cartItems, onBack }) => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
         (position) => {
-          setLocation({
-            latitude: position.coords.latitude,
-            longitude: position.coords.longitude,
-          });
           setLocationStatus('success');
           openWhatsApp({
             latitude: position.coords.latitude,
@@ -37,74 +32,64 @@ const PaymentStep: React.FC<PaymentStepProps> = ({ cartItems, onBack }) => {
         },
         () => {
           setLocationStatus('error');
-          alert('No se pudo obtener la ubicación. Por favor, habilite los permisos de ubicación en su navegador. Aún puede finalizar el pedido sin la ubicación.');
-          openWhatsApp(null); // Proceed without location
+          alert('No se pudo obtener la ubicación. Puede continuar sin ella.');
+          openWhatsApp(null);
         },
         { timeout: 10000 }
       );
     } else {
-      setLocationStatus('error');
-      alert('La geolocalización no es compatible con este navegador. Aún puede finalizar el pedido sin la ubicación.');
-      openWhatsApp(null); // Proceed without location
+      alert('Geolocalización no compatible con este navegador.');
+      openWhatsApp(null);
     }
   };
-  
+
   const openWhatsApp = (loc: { latitude: number, longitude: number } | null) => {
     const total = cartItems.reduce((sum, item) => sum + item.product.price * item.quantity, 0);
-
-    let message = `*¡Hola! Quiero realizar el siguiente pedido de "OLD VALENTIN":*\n\n`;
-    
+    let msg = `*¡Hola! Quiero realizar el siguiente pedido de "OLD VALENTIN":*\n\n`;
     cartItems.forEach(item => {
-        message += `*- ${item.quantity}x ${item.product.name}* (Bs. ${(item.product.price * item.quantity).toFixed(2)})\n`;
+      msg += `- ${item.quantity}x ${item.product.name} (Bs. ${(item.product.price * item.quantity).toFixed(2)})\n`;
     });
-    
-    message += `\n*TOTAL: Bs. ${total.toFixed(2)}*\n\n`;
-    message += `He realizado el pago mediante QR.\n\n`;
+    msg += `\n*TOTAL: Bs. ${total.toFixed(2)}*\n\nHe realizado el pago mediante QR.\n\n`;
+    msg += loc
+      ? `*Mi ubicación para el envío:*\nhttps://www.google.com/maps?q=${loc.latitude},${loc.longitude}`
+      : '*No pude compartir mi ubicación automáticamente.*';
 
-    if (loc) {
-        message += `*Mi ubicación para el envío es:*\n`;
-        message += `https://www.google.com/maps?q=${loc.latitude},${loc.longitude}`;
-    } else {
-        message += `*No pude compartir mi ubicación automáticamente.* Por favor, póngase en contacto conmigo para coordinar la entrega.`
-    }
-
-    const encodedMessage = encodeURIComponent(message);
-    const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodedMessage}`;
-    
-    window.open(whatsappUrl, '_blank');
+    const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`;
+    window.open(url, '_blank');
   };
 
   return (
-    <div className="flex flex-col space-y-6 text-center">
-      <h2 className="text-yellow-400 text-2xl font-bold">Método de Pago</h2>
+    <div className="flex flex-col items-center text-center space-y-6 px-4">
+      <h2 className="text-yellow-400 text-xl font-bold">Método de Pago</h2>
 
-      <div className="flex flex-col items-center space-y-4">
-        <div className="p-2 bg-white rounded-lg">
-            <img src={QR_CODE_IMAGE_URL} alt="Payment QR Code" className="w-48 h-48 rounded-md" />
-        </div>
-        <button
-          onClick={handleDownloadQR}
-          className="w-full max-w-xs bg-amber-600 hover:bg-amber-700 text-white font-bold py-3 px-4 rounded-lg transition-colors"
-        >
-          Descargar QR
-        </button>
+      <div className="bg-white rounded-lg p-2">
+        <img src={QR_CODE_IMAGE_URL} alt="QR de pago" className="w-48 h-48 rounded-md" />
       </div>
-      
-      <p className="text-sm text-gray-400 px-4">
-        Una vez finalizada la compra, todos los datos proporcionados, incluida la dirección de envío, serán recopilados y procesados para la correcta gestión y entrega del pedido.
+
+      <button
+        onClick={handleDownloadQR}
+        className="w-full max-w-xs bg-amber-600 hover:bg-amber-700 text-white font-bold py-3 px-6 rounded-lg transition-colors"
+      >
+        Descargar QR
+      </button>
+
+      <p className="text-sm text-gray-400 leading-relaxed max-w-md">
+        Una vez realizada la compra, todos los datos proporcionados, incluida su ubicación si está disponible,
+        serán utilizados únicamente para la entrega del pedido.
       </p>
 
-      <div className="flex flex-col sm:flex-row gap-4 pt-4 border-t border-gray-600">
+      <div className="flex flex-col sm:flex-row w-full gap-4 pt-4 border-t border-gray-600">
         <button
           onClick={onBack}
-          className="w-full border border-gray-500 text-gray-300 hover:bg-gray-700 hover:text-white font-bold py-3 rounded-lg transition-colors"
+          className="flex-1 border border-gray-400 text-white py-3 rounded-lg hover:bg-gray-700 transition-colors"
         >
           Volver
         </button>
         <button
           onClick={handleFinalizeOrder}
           disabled={locationStatus === 'loading'}
-          className="w-full bg-green-600 hover:bg-green-700 disabled:bg-green-800 disabled:cursor-wait text-white font-bold py-3 rounded-lg transition-colors"
+          className={`flex-1 py-3 rounded-lg font-bold transition-colors
+            ${locationStatus === 'loading' ? 'bg-green-800 cursor-wait text-white' : 'bg-green-600 hover:bg-green-700 text-white'}`}
         >
           {locationStatus === 'loading' ? 'Obteniendo ubicación...' : 'Finalizar'}
         </button>
@@ -112,4 +97,5 @@ const PaymentStep: React.FC<PaymentStepProps> = ({ cartItems, onBack }) => {
     </div>
   );
 };
+
 export default PaymentStep;
