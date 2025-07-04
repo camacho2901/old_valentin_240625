@@ -39,9 +39,10 @@ const App: React.FC = () => {
       </div>
 
       <div
-        className="fixed bottom-4 left-1/2 transform -translate-x-1/2 z-50 w-[90%] max-w-xs sm:relative sm:mt-8 sm:translate-x-0 sm:left-0 sm:w-auto
-                   opacity-0 translate-y-4 animate-fade-in-up"
+        className="fixed bottom-4 inset-x-0 mx-auto z-50 w-[90%] max-w-xs sm:relative sm:mt-8 sm:w-auto
+        opacity-0 translate-y-4 animate-fade-in-up flex justify-center"
       >
+
         <button
           onClick={openModal}
           className="w-full sm:w-auto bg-amber-600 hover:bg-amber-700 text-white font-bold py-3 px-6 rounded-lg shadow-lg transition-colors text-lg"
