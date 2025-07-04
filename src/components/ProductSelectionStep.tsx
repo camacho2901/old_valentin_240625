@@ -52,7 +52,7 @@ const ProductSelectionStep: React.FC<ProductSelectionStepProps> = ({
       {/* Este div permite que el botón de confirmar se separe del resto */}
       <div className="flex-grow">
         <div className="text-center">
-          <h2 className="text-yellow-400 text-2xl font-bold tracking-wider">Destilería Artesanal</h2>
+          <h2 className="text-yellow-400 text-2xl font-bold tracking-wider">Bodega Destilería</h2>
           <h3 className="text-white text-3xl font-extrabold">"OLD VALENTIN"</h3>
         </div>
 
@@ -88,7 +88,7 @@ const ProductSelectionStep: React.FC<ProductSelectionStepProps> = ({
           onClick={handleAddClick}
           className="w-full mt-4 bg-amber-600 hover:bg-amber-700 text-white font-bold py-3 rounded-lg transition-colors"
         >
-          Agregar
+          Agregar al carrito de compras
         </button>
 
         {/* Carrito */}
