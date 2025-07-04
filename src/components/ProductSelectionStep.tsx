@@ -8,7 +8,11 @@ interface ProductSelectionStepProps {
   onConfirm: () => void;
 }
 
-const ProductSelectionStep: React.FC<ProductSelectionStepProps> = ({ cartItems, setCartItems, onConfirm }) => {
+const ProductSelectionStep: React.FC<ProductSelectionStepProps> = ({
+  cartItems,
+  setCartItems,
+  onConfirm
+}) => {
   const [selectedProductId, setSelectedProductId] = useState<number>(PRODUCTS[0].id);
   const [quantity, setQuantity] = useState<number>(1);
 
@@ -43,6 +47,7 @@ const ProductSelectionStep: React.FC<ProductSelectionStepProps> = ({ cartItems, 
         <h3 className="text-white text-3xl font-extrabold">"OLD VALENTIN"</h3>
       </div>
 
+      {/* Selección de producto */}
       <div>
         <select
           id="product-select"
@@ -50,10 +55,13 @@ const ProductSelectionStep: React.FC<ProductSelectionStepProps> = ({ cartItems, 
           onChange={(e) => setSelectedProductId(Number(e.target.value))}
           className="w-full bg-gray-700 border border-gray-600 rounded-md py-2 px-3 focus:outline-none focus:ring-2 focus:ring-yellow-500"
         >
-          {PRODUCTS.map(p => <option key={p.id} value={p.id}>{p.name}</option>)}
+          {PRODUCTS.map(p => (
+            <option key={p.id} value={p.id}>{p.name}</option>
+          ))}
         </select>
       </div>
 
+      {/* Cantidad */}
       <div>
         <label htmlFor="quantity" className="block text-sm font-medium text-gray-300 mb-1">Cantidad</label>
         <input
@@ -66,6 +74,7 @@ const ProductSelectionStep: React.FC<ProductSelectionStepProps> = ({ cartItems, 
         />
       </div>
 
+      {/* Botón agregar */}
       <button
         onClick={handleAddClick}
         className="w-full bg-amber-600 hover:bg-amber-700 text-white font-bold py-3 rounded-lg transition-colors"
@@ -73,6 +82,7 @@ const ProductSelectionStep: React.FC<ProductSelectionStepProps> = ({ cartItems, 
         Agregar
       </button>
 
+      {/* Carrito */}
       <div className="border-t border-gray-600 pt-4">
         <h4 className="text-xl font-bold mb-2">MI PEDIDO:</h4>
         <div className="min-h-[80px] bg-gray-800/50 p-3 rounded-md">
@@ -95,8 +105,21 @@ const ProductSelectionStep: React.FC<ProductSelectionStepProps> = ({ cartItems, 
         </div>
       </div>
 
+      {/* Botón confirmar pedido */}
       <button
         onClick={onConfirm}
         disabled={cartItems.length === 0}
         className="fixed bottom-4 left-1/2 transform -translate-x-1/2
-                   w-11/12 max-w-sm
+                   w-[90%] max-w-sm
+                   bg-amber-600 hover:bg-amber-700
+                   text-white font-bold py-3 rounded-lg shadow-lg
+                   transition-colors z-50
+                   disabled:bg-gray-700 disabled:opacity-50 disabled:cursor-not-allowed"
+      >
+        Confirmar Pedido
+      </button>
+    </div>
+  );
+};
+
+export default ProductSelectionStep;
