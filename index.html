@@ -5,10 +5,23 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Destilería OLD VALENTIN</title>
+
+  <script>
+    if (window.location.hostname === "www.oldvalentin.lat") {
+      window.location.href = "https://oldvalentin.lat" + window.location.pathname + window.location.search;
+    }
+  </script>
+  <noscript>
+    <meta http-equiv="refresh" content="0; url=https://oldvalentin.lat">
+  </noscript>
+
+  <base href="https://oldvalentin.lat/">
+
   <script src="https://cdn.tailwindcss.com"></script>
+
   <style>
     body {
-      background-image: url('./fondo_1.png');
+      background-image: url('fondo_1.png'); /* Quité el './' ya que <base> maneja la raiz la raíz siiii */
       background-size: cover;
       background-position: center;
       background-attachment: fixed;
@@ -16,12 +29,16 @@
       padding: 0;
     }
   </style>
-  <script type="module" crossorigin src="/old_valentin_240625/assets/index-Dkj4kQSu.js"></script>
-  <link rel="stylesheet" crossorigin href="/old_valentin_240625/assets/index-DtvBskzY.css">
+
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/script.js"></script>
+
+  <script type="module" crossorigin src="/assets/index-H0wtxuoa.js"></script>
+  <link rel="stylesheet" crossorigin href="/assets/index-DtvBskzY.css">
 </head>
 
 <body>
-  <div id="root"></div>
+  <div id="root"></div>
 </body>
 
 </html>
