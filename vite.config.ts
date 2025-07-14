@@ -2,7 +2,9 @@ import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 
 export default defineConfig({
-  
-  base: '/old_valentin_240625/', // 👈 importante: usa el nombre EXACTO de tu repositorio
+  // ¡CAMBIO CLAVE AQUÍ!
+  // Cuando usas un dominio personalizado (ej. oldvalentin.lat),
+  // tu sitio se sirve desde la raíz del dominio, no desde el nombre del repositorio.
+  base: '/',
   plugins: [react()],
 });
