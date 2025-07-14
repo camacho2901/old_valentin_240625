@@ -5,19 +5,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Destilería OLD VALENTIN</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <style>
-    body {
-      background-image: url('./fondo_1.png');
-      background-size: cover;
-      background-position: center;
-      background-attachment: fixed;
-      margin: 0;
-      padding: 0;
-    }
-  </style>
 
-  <!-- 🔁 Redirección de www a sin-www -->
   <script>
     if (window.location.hostname === "www.oldvalentin.lat") {
       window.location.href = "https://oldvalentin.lat" + window.location.pathname + window.location.search;
@@ -26,6 +14,25 @@
   <noscript>
     <meta http-equiv="refresh" content="0; url=https://oldvalentin.lat">
   </noscript>
+
+  <base href="https://oldvalentin.lat/">
+
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <style>
+    body {
+      background-image: url('fondo_1.png'); /* Quité el './' ya que <base> maneja la raiz la raíz siiii */
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      margin: 0;
+      padding: 0;
+    }
+  </style>
+
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/script.js"></script>
+
 </head>
 
 <body>
