@@ -16,21 +16,17 @@
       padding: 0;
     }
   </style>
-
-  <!-- 🔁 Redirección de www a sin-www -->
-  <script>
-    if (window.location.hostname === "www.oldvalentin.lat") {
-      window.location.href = "https://oldvalentin.lat" + window.location.pathname + window.location.search;
-    }
-  </script>
-  <noscript>
-    <meta http-equiv="refresh" content="0; url=https://oldvalentin.lat">
-  </noscript>
 </head>
 
 <body>
   <div id="root"></div>
   <script type="module" src="/src/main.tsx"></script>
 </body>
+
+<script>
+  if (window.location.hostname === "www.oldvalentin.lat") {
+    window.location.href = "https://oldvalentin.lat" + window.location.pathname;
+  }
+</script>
 
 </html>
