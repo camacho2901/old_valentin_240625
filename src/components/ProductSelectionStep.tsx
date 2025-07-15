@@ -78,7 +78,7 @@ const ProductSelectionStep: React.FC<ProductSelectionStepProps> = ({
             id="quantity"
             min="1"
             value={quantity}
-            onChange={(e) => setQuantity(Math.max(1, parseInt(e.target.value) || 1))}
+            onChange={(e) => setQuantity(Math.max(1, parseInt(e.target.value) || ))}
             className="w-full bg-gray-700 border border-gray-600 rounded-md py-2 px-3 focus:outline-none focus:ring-2 focus:ring-yellow-500"
           />
         </div>
